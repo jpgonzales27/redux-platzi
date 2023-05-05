@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import "./App.css";
 import { Col } from "antd";
 import { Search } from "./components/Search";
@@ -6,15 +5,18 @@ import { PokemonList } from "./components/PokemonList";
 import logo from "./assets/logo.svg";
 import { useEffect } from "react";
 import { getPokemonsAxios } from "./api";
-import { connect } from "react-redux";
-import { setPokemons as setPokemonsActions } from "./actions";
+import { setPokemons } from "./actions";
+import { useDispatch, useSelector } from "react-redux";
 
-function App({ pokemons, setPokemons }) {
+function App() {
+  const { pokemons } = useSelector((state) => state.pokemons);
+  const dispatch = useDispatch();
+
   useEffect(() => {
     const fetchPokemons = async () => {
       // const pokemonsRes = await getPokemons();
       const pokemonsRes = await getPokemonsAxios();
-      setPokemons(pokemonsRes);
+      dispatch(setPokemons(pokemonsRes));
     };
 
     fetchPokemons();
@@ -33,20 +35,4 @@ function App({ pokemons, setPokemons }) {
   );
 }
 
-/**
- * mapStateToProps es una función recibe nuestro estado y retorna un objeto cuyas
- * propiedades van a ser enviadas a las props del componente que se está conectado a redux.
- */
-const mapStateToProps = (state) => ({
-  pokemons: state.pokemons,
-});
-
-/**
- * mapDispatchToProps es una función que recibe el dispatcher de redux y
- * retorna un objeto que será mapedo a las propiedades con los action creatrors
- */
-const mapDispatchToProps = (dispatch) => ({
-  setPokemons: (value) => dispatch(setPokemonsActions(value)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;
