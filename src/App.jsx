@@ -9,13 +9,16 @@ import { setPokemons } from "./actions";
 import { useDispatch, useSelector } from "react-redux";
 
 function App() {
-  const { pokemons } = useSelector((state) => state.pokemons);
+  // const { pokemons } = useSelector((state) => state.pokemons);
+  const algo = useSelector((state) => state.pokemons);
+  console.log("pokemons selector: ", algo);
   const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchPokemons = async () => {
       // const pokemonsRes = await getPokemons();
       const pokemonsRes = await getPokemonsAxios();
+      console.log("POKEMONSRES :", pokemonsRes);
       dispatch(setPokemons(pokemonsRes));
     };
 
@@ -30,7 +33,7 @@ function App() {
       <Col span={8} offset={8}>
         <Search />
       </Col>
-      <PokemonList pokemons={pokemons} />
+      {/* <PokemonList pokemons={pokemons} /> */}
     </div>
   );
 }

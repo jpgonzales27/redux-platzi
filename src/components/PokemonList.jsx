@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import { PokemonCard } from "./PokemonCard";
 
 export const PokemonList = ({ pokemons }) => {
+  console.log("POKEMONS: ", pokemons);
   return (
     <div className="PokemonList">
       {pokemons.map((pokemon) => {
