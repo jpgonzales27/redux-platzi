@@ -21,3 +21,10 @@ export const getPokemonsAxios = async () => {
     console.error("There was an error: ", error);
   }
 };
+
+export const getPokemonDetails = (pokemon) => {
+  return axios
+    .get(pokemon.url)
+    .then((res) => res.data)
+    .catch((err) => console.log(err));
+};

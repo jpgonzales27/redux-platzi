@@ -2,11 +2,17 @@ import PropTypes from "prop-types";
 import { PokemonCard } from "./PokemonCard";
 
 export const PokemonList = ({ pokemons }) => {
-  console.log("POKEMONS: ", pokemons);
   return (
     <div className="PokemonList">
       {pokemons.map((pokemon) => {
-        return <PokemonCard name={pokemon.name} key={pokemon.name} />;
+        return (
+          <PokemonCard
+            name={pokemon.name}
+            key={pokemon.name}
+            image={pokemon.sprites.front_default}
+            types={pokemon.types}
+          />
+        );
       })}
     </div>
   );
